@@ -3,343 +3,589 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portal One - твій власний суперінтелект, на твоєму боці</title>
-<meta name="description" content="Portal One - персональний AI-агент, який належить одній людині. Він робить роботу сам, памʼятає що важливо, і не надсилає нічого без твого слова.">
-<meta property="og:title" content="Portal One - твій власний суперінтелект, на твоєму боці">
-<meta property="og:description" content="Твій. Робить роботу сам. Стоїть на твоєму боці.">
+<title>Portal One — розумний помічник, який знає тебе</title>
+<meta name="description" content="Portal One — твій особистий помічник зі штучним інтелектом. Він памʼятає твоє життя, робить справи сам і живе у звичайному Telegram. Без налаштувань і складних слів.">
+<meta property="og:title" content="Portal One — розумний помічник, який знає тебе">
+<meta property="og:description" content="Він памʼятає. Він робить сам. Він твій.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg:#07080d; --bg2:#0c0e16; --card:#11131d; --line:rgba(255,255,255,.09);
- --ink:#f2f3f7; --muted:#9aa0b4; --dim:#6f748a;
- --accent:#7c6cff; --accent2:#4fc4ff; --glow:rgba(124,108,255,.35);
- --ok:#5ddc9a;
- --max:1100px;
+  --bg:#07080d;
+  --bg-soft:#0c0e17;
+  --card:#12141f;
+  --card-2:#171a27;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.14);
+  --ink:#f4f5f9;
+  --muted:#a2a8bd;
+  --dim:#71768c;
+  --violet:#7c6cff;
+  --cyan:#4fc4ff;
+  --rose:#ff9ec7;
+  --peach:#ffc08a;
+  --ok:#5ddc9a;
+  --glow:rgba(124,108,255,.38);
+  --max:1120px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
- margin:0; background:var(--bg); color:var(--ink);
- font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
- line-height:1.6; -webkit-font-smoothing:antialiased;
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
 body::before{
- content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
- background:
- radial-gradient(900px 600px at 15% -10%, rgba(124,108,255,.20), transparent 60%),
- radial-gradient(700px 500px at 90% 0%, rgba(79,196,255,.13), transparent 60%);
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(900px 640px at 12% -8%, rgba(124,108,255,.22), transparent 62%),
+    radial-gradient(760px 520px at 92% 2%, rgba(79,196,255,.14), transparent 60%),
+    radial-gradient(680px 520px at 60% 108%, rgba(255,158,199,.10), transparent 62%);
 }
 .wrap{position:relative; z-index:1; max-width:var(--max); margin:0 auto; padding:0 22px}
 a{color:inherit}
-h1,h2,h3{line-height:1.15; margin:0; letter-spacing:-.02em}
-h1{font-size:clamp(2.3rem,6vw,4.1rem); font-weight:800}
-h2{font-size:clamp(1.7rem,3.6vw,2.6rem); font-weight:800}
-h3{font-size:1.1rem; font-weight:700}
+h1,h2,h3{line-height:1.14; margin:0; letter-spacing:-.025em}
+h1{font-size:clamp(2.4rem,6.4vw,4.3rem); font-weight:800}
+h2{font-size:clamp(1.75rem,3.8vw,2.7rem); font-weight:800}
+h3{font-size:1.12rem; font-weight:700; letter-spacing:-.01em}
 p{margin:0}
 
-nav{position:sticky; top:0; z-index:20; backdrop-filter:blur(14px);
- background:rgba(7,8,13,.72); border-bottom:1px solid var(--line)}
-.nav-in{display:flex; align-items:center; justify-content:space-between; height:64px}
-.logo{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:-.02em}
-.orb{width:22px; height:22px; border-radius:50%;
- background:radial-gradient(circle at 32% 30%, #cfe6ff, var(--accent2) 38%, var(--accent) 78%);
- box-shadow:0 0 22px var(--glow)}
+/* ---------- nav ---------- */
+nav{position:sticky; top:0; z-index:40; backdrop-filter:blur(16px);
+  background:rgba(7,8,13,.76); border-bottom:1px solid var(--line)}
+.nav-in{display:flex; align-items:center; justify-content:space-between; height:66px}
+.logo{display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.02em; font-size:1.02rem}
+.orb{width:24px; height:24px; border-radius:50%; flex:0 0 24px;
+  background:radial-gradient(circle at 32% 28%, #e8f4ff, var(--cyan) 36%, var(--violet) 76%);
+  box-shadow:0 0 24px var(--glow); animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 20px var(--glow)}50%{box-shadow:0 0 34px rgba(124,108,255,.6)}}
 .nav-links{display:flex; align-items:center; gap:26px; font-size:.94rem; color:var(--muted)}
-.nav-links a{text-decoration:none}
+.nav-links a{text-decoration:none; transition:.15s}
 .nav-links a:hover{color:var(--ink)}
-@media(max-width:720px){.nav-links .hide-s{display:none}}
+@media(max-width:780px){.nav-links .hide-s{display:none}}
 
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
- padding:13px 24px; border-radius:999px; font-weight:700; font-size:.97rem;
- text-decoration:none; border:1px solid transparent; transition:.18s ease; white-space:nowrap}
-.btn-p{background:linear-gradient(135deg,var(--accent),#5a7bff); color:#fff; box-shadow:0 8px 30px var(--glow)}
-.btn-p:hover{transform:translateY(-2px); box-shadow:0 12px 38px var(--glow)}
-.btn-s{background:rgba(255,255,255,.05); border-color:var(--line); color:var(--ink)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  padding:14px 26px; border-radius:999px; font-weight:700; font-size:1rem;
+  text-decoration:none; border:1px solid transparent; transition:.18s ease; white-space:nowrap; cursor:pointer}
+.btn-p{background:linear-gradient(135deg,var(--violet),#5b7cff); color:#fff; box-shadow:0 10px 34px var(--glow)}
+.btn-p:hover{transform:translateY(-2px); box-shadow:0 16px 44px var(--glow)}
+.btn-s{background:rgba(255,255,255,.05); border-color:var(--line-2); color:var(--ink)}
 .btn-s:hover{background:rgba(255,255,255,.1)}
-.btn-sm{padding:10px 18px; font-size:.9rem}
+.btn-sm{padding:10px 19px; font-size:.9rem}
 
-header{padding:clamp(70px,11vw,130px) 0 clamp(50px,7vw,80px)}
-.pill{display:inline-flex; align-items:center; gap:8px; padding:7px 15px; border-radius:999px;
- border:1px solid var(--line); background:rgba(255,255,255,.04);
- font-size:.83rem; color:var(--muted); margin-bottom:26px}
+/* ---------- hero ---------- */
+header{padding:clamp(56px,8vw,104px) 0 clamp(40px,6vw,72px)}
+.hero{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center}
+@media(max-width:940px){.hero{grid-template-columns:1fr; gap:44px}}
+.pill{display:inline-flex; align-items:center; gap:9px; padding:8px 16px; border-radius:999px;
+  border:1px solid var(--line-2); background:rgba(255,255,255,.04);
+  font-size:.84rem; color:var(--muted); margin-bottom:26px}
 .dot{width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 10px var(--ok)}
-.lead{margin-top:24px; font-size:clamp(1.06rem,2.1vw,1.28rem); color:var(--muted); max-width:640px}
-.cta{display:flex; flex-wrap:wrap; gap:13px; margin-top:38px}
-.note{margin-top:18px; font-size:.87rem; color:var(--dim)}
+.grad{background:linear-gradient(115deg,#fff 10%,var(--rose) 45%,var(--violet) 85%);
+  -webkit-background-clip:text; background-clip:text; color:transparent}
+.lead{margin-top:26px; font-size:clamp(1.08rem,2.1vw,1.3rem); color:var(--muted); max-width:560px}
+.cta{display:flex; flex-wrap:wrap; gap:13px; margin-top:36px}
+.note{margin-top:18px; font-size:.88rem; color:var(--dim)}
+.trust{display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:30px; font-size:.85rem; color:var(--dim)}
+.trust span{display:inline-flex; align-items:center; gap:7px}
+.tick{color:var(--ok); font-weight:800}
 
-section{padding:clamp(56px,8vw,96px) 0; position:relative; z-index:1}
-.sec-head{max-width:660px; margin-bottom:44px}
-.sec-head p{color:var(--muted); margin-top:14px; font-size:1.05rem}
-.kicker{font-size:.79rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent2); font-weight:700; margin-bottom:14px}
+/* ---------- phone mockup ---------- */
+.phone{
+  width:min(330px,100%); margin:0 auto; border-radius:38px; padding:11px;
+  background:linear-gradient(160deg,#23263a,#0e1019);
+  border:1px solid var(--line-2);
+  box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03) inset;
+  position:relative;
+}
+.phone::after{content:""; position:absolute; top:20px; left:50%; transform:translateX(-50%);
+  width:88px; height:6px; border-radius:99px; background:rgba(255,255,255,.14)}
+.screen{background:#0b0d15; border-radius:28px; padding:34px 15px 17px; min-height:430px;
+  display:flex; flex-direction:column; gap:11px; overflow:hidden}
+.tg-head{display:flex; align-items:center; gap:10px; padding:0 4px 12px; border-bottom:1px solid var(--line)}
+.tg-av{width:34px; height:34px; border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, #e8f4ff, var(--cyan) 36%, var(--violet) 78%);
+  box-shadow:0 0 16px var(--glow)}
+.tg-name{font-size:.9rem; font-weight:700}
+.tg-status{font-size:.72rem; color:var(--ok)}
+.bub{max-width:84%; padding:10px 14px; border-radius:17px; font-size:.87rem; line-height:1.5; animation:pop .5s ease both}
+.bub.me{align-self:flex-end; background:linear-gradient(135deg,var(--violet),#5b7cff); color:#fff; border-bottom-right-radius:6px}
+.bub.ai{align-self:flex-start; background:var(--card-2); border:1px solid var(--line); color:var(--ink); border-bottom-left-radius:6px}
+.bub small{display:block; margin-top:6px; color:var(--dim); font-size:.74rem}
+@keyframes pop{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+.bub:nth-child(2){animation-delay:.15s}
+.bub:nth-child(3){animation-delay:.35s}
+.bub:nth-child(4){animation-delay:.6s}
+.bub:nth-child(5){animation-delay:.85s}
+.typing{display:inline-flex; gap:4px; align-items:center}
+.typing i{width:6px; height:6px; border-radius:50%; background:var(--dim); animation:blink 1.3s infinite}
+.typing i:nth-child(2){animation-delay:.2s}
+.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.28}30%{opacity:1}}
+
+section{padding:clamp(58px,8vw,100px) 0; position:relative; z-index:1}
+.sec-head{max-width:680px; margin-bottom:46px}
+.sec-head.center{margin-left:auto; margin-right:auto; text-align:center}
+.sec-head p{color:var(--muted); margin-top:16px; font-size:1.06rem}
+.kicker{font-size:.78rem; letter-spacing:.15em; text-transform:uppercase; color:var(--cyan); font-weight:800; margin-bottom:14px}
 
 .grid{display:grid; gap:18px}
 .g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:860px){.g3{grid-template-columns:1fr}}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:880px){.g3,.g2{grid-template-columns:1fr}}
 
-.card{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:26px}
-.card h3{margin-bottom:9px}
-.card p{color:var(--muted); font-size:.97rem}
-.card .ico{font-size:1.5rem; margin-bottom:14px; display:block}
+.card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:28px; transition:.2s}
+.card:hover{border-color:var(--line-2); transform:translateY(-3px)}
+.card h3{margin-bottom:10px}
+.card p{color:var(--muted); font-size:.98rem}
+.ic{width:52px; height:52px; border-radius:15px; display:grid; place-items:center; margin-bottom:18px;
+  background:rgba(124,108,255,.12); border:1px solid rgba(124,108,255,.25)}
+.ic.c2{background:rgba(79,196,255,.11); border-color:rgba(79,196,255,.25)}
+.ic.c3{background:rgba(255,158,199,.11); border-color:rgba(255,158,199,.25)}
+.ic svg{width:26px; height:26px}
 
-.caps{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:14px}
-.cap{background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:14px; padding:18px 20px}
-.cap b{display:block; font-size:.98rem; margin-bottom:5px}
-.cap span{color:var(--muted); font-size:.89rem}
+/* explainer */
+.explain{background:linear-gradient(160deg,rgba(124,108,255,.12),rgba(79,196,255,.05));
+  border:1px solid var(--line-2); border-radius:24px; padding:clamp(26px,4vw,44px)}
+.explain h2{max-width:640px}
+.explain .two{display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:30px}
+@media(max-width:820px){.explain .two{grid-template-columns:1fr}}
+.explain .two > div{background:rgba(7,8,13,.42); border:1px solid var(--line); border-radius:16px; padding:22px}
+.explain .two h3{margin-bottom:8px; font-size:1rem}
+.explain .two p{color:var(--muted); font-size:.96rem}
+.strike{color:var(--dim); text-decoration:line-through; text-decoration-color:rgba(255,158,199,.6)}
 
-.step{display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--line)}
-.step:last-child{border-bottom:0}
-.step-n{flex:0 0 42px; height:42px; border-radius:50%; display:grid; place-items:center;
- background:rgba(124,108,255,.15); border:1px solid rgba(124,108,255,.35);
- font-weight:800; color:#c3bcff}
-.step p{color:var(--muted); margin-top:6px}
+/* scenarios */
+.scen{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+@media(max-width:1000px){.scen{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.scen{grid-template-columns:1fr}}
+.scen-card{background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; display:flex; flex-direction:column}
+.scen-top{padding:22px 22px 0}
+.scen-tag{display:inline-flex; align-items:center; gap:7px; font-size:.75rem; font-weight:800; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--peach); margin-bottom:10px}
+.scen-card h3{margin-bottom:8px}
+.scen-card > .scen-top > p{color:var(--muted); font-size:.94rem}
+.chatbox{margin:18px; padding:16px; border-radius:16px; background:#0b0d15; border:1px solid var(--line);
+  display:flex; flex-direction:column; gap:9px; flex:1}
+.chatbox .bub{font-size:.84rem; max-width:90%}
 
-.proof{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px}
-.proof-top{display:flex; align-items:center; gap:12px; margin-bottom:14px}
-.av{width:40px; height:40px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:.85rem; color:#0b0c11}
-.proof-top b{display:block; font-size:.95rem}
-.proof-top span{color:var(--dim); font-size:.83rem}
-.proof p{color:var(--muted); font-size:.97rem}
+/* capabilities */
+.caps{display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:14px}
+.cap{background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:16px; padding:20px; transition:.18s}
+.cap:hover{background:rgba(255,255,255,.06); transform:translateY(-2px)}
+.cap .emo{font-size:1.35rem; display:block; margin-bottom:10px}
+.cap b{display:block; font-size:.99rem; margin-bottom:5px}
+.cap span{color:var(--muted); font-size:.89rem; line-height:1.5}
 
+/* steps */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+@media(max-width:880px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:28px; position:relative}
+.step-n{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; margin-bottom:18px;
+  background:rgba(124,108,255,.16); border:1px solid rgba(124,108,255,.38); font-weight:800; color:#c7c0ff}
+.step p{color:var(--muted); margin-top:8px; font-size:.97rem}
+
+/* proof */
+.proof{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px}
+.proof-top{display:flex; align-items:center; gap:12px; margin-bottom:15px}
+.av{width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:.86rem; color:#0b0c11}
+.proof-top b{display:block; font-size:.96rem}
+.proof-top span{color:var(--dim); font-size:.82rem}
+.proof p{color:var(--muted); font-size:.98rem}
+.stars{color:var(--peach); font-size:.85rem; letter-spacing:2px; margin-bottom:10px}
+
+/* pricing */
 .tiers{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; align-items:stretch}
-@media(max-width:980px){.tiers{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.tiers{grid-template-columns:1fr}}
-.tier{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px 22px; display:flex; flex-direction:column}
-.tier.hot{border-color:rgba(124,108,255,.55); box-shadow:0 0 0 1px rgba(124,108,255,.2), 0 18px 50px rgba(124,108,255,.16)}
-.tier .tag{font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent2); font-weight:800; margin-bottom:12px; min-height:14px}
-.tier .nm{font-size:1.15rem; font-weight:800}
-.price{font-size:2.3rem; font-weight:800; margin:10px 0 4px; letter-spacing:-.03em}
+@media(max-width:1000px){.tiers{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.tiers{grid-template-columns:1fr}}
+.tier{background:var(--card); border:1px solid var(--line); border-radius:22px; padding:28px 23px; display:flex; flex-direction:column; position:relative}
+.tier.hot{border-color:rgba(124,108,255,.55); background:linear-gradient(170deg,rgba(124,108,255,.13),var(--card) 55%);
+  box-shadow:0 20px 56px rgba(124,108,255,.18)}
+.tier .tag{font-size:.7rem; letter-spacing:.11em; text-transform:uppercase; color:var(--cyan); font-weight:800; margin-bottom:12px; min-height:15px}
+.tier.hot .tag{color:var(--rose)}
+.tier .nm{font-size:1.16rem; font-weight:800}
+.price{font-size:2.4rem; font-weight:800; margin:10px 0 2px; letter-spacing:-.035em}
 .price small{font-size:.95rem; font-weight:600; color:var(--dim)}
-.tier p.desc{color:var(--muted); font-size:.92rem; margin:10px 0 18px; flex:1}
+.tier p.desc{color:var(--muted); font-size:.93rem; margin:12px 0 20px; flex:1}
 .tier .btn{width:100%}
-.pay-note{margin-top:22px; color:var(--dim); font-size:.9rem; text-align:center}
+.pay-note{margin-top:24px; color:var(--dim); font-size:.91rem; text-align:center; max-width:660px; margin-left:auto; margin-right:auto}
 
-.invite{margin-top:30px; border:1px solid rgba(124,108,255,.35); background:rgba(124,108,255,.07);
- border-radius:18px; padding:24px; text-align:center}
-.invite b{font-size:1.05rem}
-.invite .code{display:inline-block; margin-top:12px; padding:10px 20px; border-radius:12px;
- background:rgba(0,0,0,.35); border:1px solid var(--line);
- font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:1.25rem; font-weight:800; letter-spacing:.06em}
-.invite p{color:var(--muted); font-size:.93rem; margin-top:12px}
+/* invite */
+.invite{background:linear-gradient(150deg,rgba(255,158,199,.14),rgba(124,108,255,.10));
+  border:1px solid rgba(255,158,199,.3); border-radius:24px; padding:clamp(26px,4vw,40px); text-align:center}
+.code{display:inline-block; margin-top:18px; padding:14px 28px; border-radius:14px; font-weight:800; font-size:1.3rem;
+  letter-spacing:.12em; background:rgba(7,8,13,.55); border:1px dashed rgba(255,158,199,.5); color:var(--rose)}
 
-.honest{border:1px dashed rgba(255,255,255,.18); border-radius:18px; padding:26px; background:rgba(255,255,255,.02)}
-.honest ul{margin:14px 0 0; padding-left:20px; color:var(--muted)}
-.honest li{margin-bottom:8px}
+/* honest */
+.honest{border:1px dashed var(--line-2); border-radius:22px; padding:30px; background:rgba(255,255,255,.02)}
+.honest ul{margin:16px 0 0; padding-left:20px; color:var(--muted)}
+.honest li{margin-bottom:10px}
 
-details{border-bottom:1px solid var(--line); padding:20px 0}
-summary{cursor:pointer; font-weight:700; font-size:1.04rem; list-style:none; display:flex; justify-content:space-between; gap:16px}
+/* faq */
+details{border-bottom:1px solid var(--line); padding:22px 0}
+summary{cursor:pointer; font-weight:700; font-size:1.05rem; list-style:none; display:flex; justify-content:space-between; gap:16px}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+"; color:var(--accent2); font-weight:800; flex:0 0 auto}
+summary::after{content:"+"; color:var(--cyan); font-weight:800; flex:0 0 auto; font-size:1.3rem; line-height:1}
 details[open] summary::after{content:"–"}
-details p{color:var(--muted); margin-top:12px; font-size:.98rem}
+details p{color:var(--muted); margin-top:13px; font-size:.99rem}
 
-.final{text-align:center; padding:clamp(60px,9vw,110px) 0}
+/* final */
+.final{text-align:center; padding:clamp(64px,9vw,116px) 0}
 .final .cta{justify-content:center}
-footer{border-top:1px solid var(--line); padding:32px 0; color:var(--dim); font-size:.87rem}
+.final .orb-big{width:76px; height:76px; border-radius:50%; margin:0 auto 28px;
+  background:radial-gradient(circle at 32% 28%, #eaf5ff, var(--cyan) 34%, var(--violet) 74%);
+  box-shadow:0 0 60px var(--glow); animation:breathe 4s ease-in-out infinite}
+footer{border-top:1px solid var(--line); padding:34px 0; color:var(--dim); font-size:.88rem}
+.foot-in{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
 </style>
 </head>
 <body>
 
 <nav><div class="wrap nav-in">
- <div class="logo"><span class="orb"></span> Portal One</div>
- <div class="nav-links">
- <a href="#can" class="hide-s">Що вміє</a>
- <a href="#how" class="hide-s">Як працює</a>
- <a href="#price">Тарифи</a>
- <a class="btn btn-p btn-sm" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати</a>
- </div>
+  <div class="logo"><span class="orb"></span> Portal One</div>
+  <div class="nav-links">
+    <a href="#what" class="hide-s">Що це</a>
+    <a href="#life" class="hide-s">Приклади</a>
+    <a href="#price">Ціни</a>
+    <a class="btn btn-p btn-sm" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати</a>
+  </div>
 </div></nav>
 
-<header><div class="wrap">
- <div class="pill"><span class="dot"></span> Живе в Telegram і у браузері</div>
- <h1>Твій власний<br>суперінтелект.<br>На твоєму боці.</h1>
- <p class="lead">Portal One робить роботу сам, памʼятає те, що важливо, і не надсилає нічого без твого слова. Не чат-бот, з яким ти починаєш спочатку щоранку, а агент, який живе поруч і знає твій контекст.</p>
- <div class="cta">
- <a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати в Telegram</a>
- <a class="btn btn-s" href="#price">Подивитись тарифи</a>
- </div>
- <p class="note">Вхід за запрошенням, код уже вшитий у кнопку. Українська, російська, англійська. Ніяких налаштувань і конфігів.</p>
+<header><div class="wrap hero">
+  <div>
+    <div class="pill"><span class="dot"></span> Живе у твоєму Telegram</div>
+    <h1>Помічник, який <span class="grad">памʼятає тебе</span> і робить справи сам</h1>
+    <p class="lead">Не програма, яку треба вчитися вмикати. Просто пишеш йому, як подрузі — своїми словами або голосовим. А він розбирається і робить.</p>
+    <div class="cta">
+      <a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Спробувати безкоштовно</a>
+      <a class="btn btn-s" href="#life">Показати приклади</a>
+    </div>
+    <div class="trust">
+      <span><b class="tick">✓</b> нічого не треба встановлювати</span>
+      <span><b class="tick">✓</b> українською або як тобі зручно</span>
+      <span><b class="tick">✓</b> можна голосовими</span>
+    </div>
+  </div>
+  <div class="phone">
+    <div class="screen">
+      <div class="tg-head">
+        <div class="tg-av"></div>
+        <div><div class="tg-name">Portal One</div><div class="tg-status">онлайн</div></div>
+      </div>
+      <div class="bub me">У мами день народження в суботу, а я знову забула щось придумати 🙈</div>
+      <div class="bub ai">Памʼятаю, ти казала, що вона любить садити квіти і скаржилась на спину. Можу зібрати три варіанти подарунка до 2000 грн з доставкою до пʼятниці?</div>
+      <div class="bub me">так, давай</div>
+      <div class="bub ai">Готово, три варіанти з цінами і посиланнями нижче. І я поставлю нагадування в пʼятницю зранку — щоб ти встигла підписати листівку.<small>і так, я памʼятатиму це наступного року</small></div>
+      <div class="bub ai"><span class="typing"><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
 </div></header>
 
+<section id="what"><div class="wrap">
+  <div class="explain">
+    <div class="kicker">Якщо коротко</div>
+    <h2>Уяви подругу, яка все памʼятає і все встигає</h2>
+    <p style="color:var(--muted); margin-top:16px; max-width:660px; font-size:1.06rem">
+      Ти пишеш їй у Telegram те, що зазвичай тримаєш у голові: списки, дні народження, «треба записатися до лікаря», «знайди мені сукню». Вона не забуває, не втомлюється і не питає «а що ти маєш на увазі» вп'яте. Тільки це не подруга, а розумний помічник, який працює цілодобово і належить тільки тобі.
+    </p>
+    <div class="two">
+      <div>
+        <h3>Що НЕ треба робити</h3>
+        <p class="strike">Встановлювати програму. Розбиратися в налаштуваннях. Вчити «промпти». Писати англійською. Читати інструкцію. Бути «в темі технологій».</p>
+      </div>
+      <div>
+        <h3>Що треба зробити</h3>
+        <p>Відкрити Telegram, який у тебе вже є, і написати перше повідомлення звичайними словами. Все. Далі він сам питатиме, що потрібно.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
 <section id="why"><div class="wrap">
- <div class="sec-head">
- <div class="kicker">Навіщо це</div>
- <h2>Асистентів багато. Твого немає.</h2>
- <p>Звичайний чат забуває тебе між сесіями, дає поради замість дій і належить продукту, а не тобі. Portal One будувався від протилежного.</p>
- </div>
- <div class="grid g3">
- <div class="card">
- <span class="ico">🧠</span>
- <h3>Він памʼятає</h3>
- <p>Хто ти, чим живеш, як звати твоїх людей, що ви вирішили минулого місяця. Кожна розмова продовжує попередню, а не стартує з нуля.</p>
- </div>
- <div class="card">
- <span class="ico">⚙️</span>
- <h3>Він робить</h3>
- <p>Свій пісочний контейнер, свій браузер, свої файли. Він шукає, читає, малює, ставить нагадування і доводить справу до кінця, а не видає інструкцію на п'ять пунктів.</p>
- </div>
- <div class="card">
- <span class="ico">🤝</span>
- <h3>Він твій</h3>
- <p>Одна людина, один агент, ізольований простір. Він на твоєму боці, а не на боці рекламодавця. Нічого назовні без твого дозволу.</p>
- </div>
- </div>
+  <div class="sec-head center">
+    <div class="kicker">Чим він інший</div>
+    <h2>Три речі, яких немає у звичайних чатів</h2>
+    <p>Багато хто чув про штучний інтелект, але не розуміє, навіщо він особисто їм. Ось навіщо.</p>
+  </div>
+  <div class="grid g3">
+    <div class="card">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#a99cff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 0-4 4v1a3 3 0 0 0-1 5.8V16a4 4 0 0 0 5 3.9A4 4 0 0 0 17 16v-2.2A3 3 0 0 0 16 8V7a4 4 0 0 0-4-4Z"/><path d="M12 3v18"/></svg></div>
+      <h3>Він памʼятає твоє життя</h3>
+      <p>Як звати твоїх дітей, чим хворіє мама, на що в тебе алергія, що ви вирішили минулого місяця. Ти не пояснюєш все спочатку щоразу — розмова просто продовжується, як з живою людиною.</p>
+    </div>
+    <div class="card">
+      <div class="ic c2"><svg viewBox="0 0 24 24" fill="none" stroke="#8fd8ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg></div>
+      <h3>Він робить, а не радить</h3>
+      <p>Звичайний чат видасть тобі «5 порад, як вибрати подарунок». Цей піде в магазини, порівняє ціни, збере кошик, поставить нагадування і надішле листа. Ти отримуєш результат, а не домашнє завдання.</p>
+    </div>
+    <div class="card">
+      <div class="ic c3"><svg viewBox="0 0 24 24" fill="none" stroke="#ffb3d4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.5 5.5 0 0 0-8.8-1.4l-.9.9-.9-.9a5.5 5.5 0 0 0-7.8 7.8l8.7 8.7 8.7-8.7a5.5 5.5 0 0 0 1-6.4Z"/></svg></div>
+      <h3>Він тільки твій</h3>
+      <p>Не спільний робот на всіх. У тебе свій, окремий, з власним іменем, яке ти йому даси. Твої розмови й файли не бачить ніхто інший, і нічого назовні він не надішле без твого «так».</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="life"><div class="wrap">
+  <div class="sec-head center">
+    <div class="kicker">З життя</div>
+    <h2>Як це виглядає насправді</h2>
+    <p>Справжні ситуації, звичайними словами. Так само можна писати і голосовим — він розуміє.</p>
+  </div>
+  <div class="scen">
+
+    <div class="scen-card">
+      <div class="scen-top">
+        <div class="scen-tag">☀️ Ранок</div>
+        <h3>День, який уже розкладено</h3>
+        <p>Він сам пише першим і нагадує те, що ти просила тиждень тому.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bub ai">Доброго ранку 🌤 Сьогодні +19 і дощ по обіді — візьми парасольку. О 14:00 у Софійки стоматолог, виїжджати десь о 13:20. І вітаміни 💊</div>
+        <div class="bub me">ой, дякую. ще треба скасувати запис до перукаря</div>
+        <div class="bub ai">Зателефоную не можу, але напишу їм у Instagram від твого імені — показати текст перед відправкою?</div>
+      </div>
+    </div>
+
+    <div class="scen-card">
+      <div class="scen-top">
+        <div class="scen-tag">💬 Стосунки</div>
+        <h3>Що він мав на увазі</h3>
+        <p>Показуєш переписку — отримуєш спокійний погляд збоку, без драми.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bub me">прочитай це і скажи мені чесно, я накручую себе чи ні</div>
+        <div class="bub ai">Не накручуєш, але й катастрофи немає. Він двічі перевів тему, коли ти говорила про плани — це або уникання, або він справді зайнятий. Один прямий рядок закриє питання. Написати варіант?</div>
+        <div class="bub me">напиши, тільки без пафосу</div>
+      </div>
+    </div>
+
+    <div class="scen-card">
+      <div class="scen-top">
+        <div class="scen-tag">🛍 Покупки</div>
+        <h3>Знайти і принести</h3>
+        <p>Не список посилань, а готовий кошик із живими цінами.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bub me">треба чорні черевики на осінь, зручні, до 4000</div>
+        <div class="bub ai">Три варіанти в наявності у твоєму розмірі, всі з поверненням. Другі — та сама марка, що й твої торішні кросівки, які тобі зайшли.</div>
+        <div class="bub ai">Кошик зібрано, оплата на сайті магазину 👇<small>картку я не бачу і не зберігаю</small></div>
+      </div>
+    </div>
+
+    <div class="scen-card">
+      <div class="scen-top">
+        <div class="scen-tag">🎨 Створити</div>
+        <h3>Картинка з голови</h3>
+        <p>Опиши словами — отримай зображення. Для запрошення, посту, подарунка.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bub me">зроби листівку на день народження мамі, з півоніями і теплим світлом</div>
+        <div class="bub ai">Тримай 🌸 Зробити ще варіант вертикальний, щоб надрукувати?</div>
+        <div class="bub me">так, і додай надпис «Найріднішій»</div>
+      </div>
+    </div>
+
+    <div class="scen-card">
+      <div class="scen-top">
+        <div class="scen-tag">🧒 Діти</div>
+        <h3>Домашка і вечірні ритуали</h3>
+        <p>Пояснить дитині простими словами і придумає, чим зайняти в дощ.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bub me">поясни другокласниці, чому буває веселка, тільки коротко</div>
+        <div class="bub ai">Готово, три речення і один дослід зі склянкою води, який можна зробити на кухні прямо зараз 🌈</div>
+        <div class="bub me">а казку на ніч про неї і кота?</div>
+      </div>
+    </div>
+
+    <div class="scen-card">
+      <div class="scen-top">
+        <div class="scen-tag">📋 Побут</div>
+        <h3>Те, що весь час забувається</h3>
+        <p>Ліки, вода, дні народження, комуналка, запис до лікаря.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bub me">нагадуй пити воду щодня о 11 і о 16</div>
+        <div class="bub ai">Поставила. І ще одне: завтра день народження у Наталі — торік ти просила не дати тобі знову його проґавити 🎂</div>
+        <div class="bub me">о боже, дякую</div>
+      </div>
+    </div>
+
+  </div>
 </div></section>
 
 <section id="can"><div class="wrap">
- <div class="sec-head">
- <div class="kicker">Що вміє</div>
- <h2>Один агент замість десяти вкладок</h2>
- <p>Усе нижче працює сьогодні, у проді, для реальних людей.</p>
- </div>
- <div class="caps">
- <div class="cap"><b>Памʼять і щоденник</b><span>Довга памʼять плюс щоденні нотатки. Питай «що ми вирішили тоді» і отримуй відповідь.</span></div>
- <div class="cap"><b>Нагадування і рутини</b><span>Разові й повторювані, у твоєму часовому поясі. Ліки, вода, тренування, дні народження, публікації.</span></div>
- <div class="cap"><b>Зображення</b><span>Логотипи, ілюстрації, меми, мокапи, контент для соцмереж, візуалізація образів.</span></div>
- <div class="cap"><b>Короткі відео</b><span>Кліпи на кілька секунд одразу зі звуком, згенерованим під сцену.</span></div>
- <div class="cap"><b>Голос</b><span>Надсилай голосові замість тексту. Відповідь теж може прийти голосом.</span></div>
- <div class="cap"><b>Пошук і читання вебу</b><span>Швидкий пошук плюс читання сторінок, які зазвичай блокують ботів.</span></div>
- <div class="cap"><b>Дослідження людей і брендів</b><span>Публічні профілі та пости в Instagram, LinkedIn, X, Facebook: біо, аудиторія, останні публікації.</span></div>
- <div class="cap"><b>Керування браузером</b><span>Заповнити форму, натиснути кнопку, зробити скріншот, пройти сценарій на сайті.</span></div>
- <div class="cap"><b>Календар і зустрічі</b><span>Ставить подію в Google Calendar з Meet-лінком і розсилає запрошення учасникам.</span></div>
- <div class="cap"><b>Аналіз тренувань</b><span>Strava: пульсові зони, спліти по кілометрах, підйоми, прискорення, сегменти й рекорди.</span></div>
- <div class="cap"><b>Файли й документи</b><span>Кидай PDF, CSV, фото, таблиці. Прочитає, розбере, порахує, поверне результат.</span></div>
- <div class="cap"><b>Магазин навичок</b><span>Підключай інтеграції та готові продукти прямо з чату, коли вони справді потрібні.</span></div>
- </div>
+  <div class="sec-head center">
+    <div class="kicker">Що він уміє</div>
+    <h2>Один помічник замість десяти застосунків</h2>
+    <p>Усе це працює вже сьогодні. Нічого підключати не треба — просто попроси.</p>
+  </div>
+  <div class="caps">
+    <div class="cap"><span class="emo">🧠</span><b>Памʼятає все</b><span>Твої звички, людей, плани й домовленості. Питай «що ми вирішили тоді» — і він відповість.</span></div>
+    <div class="cap"><span class="emo">⏰</span><b>Нагадує</b><span>Разово або щодня, у твоєму часі. Ліки, вода, тренування, дні народження, оплата рахунків.</span></div>
+    <div class="cap"><span class="emo">🎨</span><b>Малює картинки</b><span>Листівки, аватарки, ідеї інтерʼєру, картинки для постів. Просто опиши словами.</span></div>
+    <div class="cap"><span class="emo">🎬</span><b>Робить короткі відео</b><span>Кілька секунд відео зі звуком — привітання, сторіс, ідея для реклами.</span></div>
+    <div class="cap"><span class="emo">🎙</span><b>Розуміє голосові</b><span>Ліньки писати — надішли голосове. І відповісти теж може голосом.</span></div>
+    <div class="cap"><span class="emo">🔎</span><b>Шукає й читає</b><span>Знайде, порівняє, прочитає довгу статтю і перекаже суть у трьох реченнях.</span></div>
+    <div class="cap"><span class="emo">📸</span><b>Дивиться профілі</b><span>Розкаже, що зараз постить конкурент або блогер, і що з цього працює.</span></div>
+    <div class="cap"><span class="emo">🛒</span><b>Купує й збирає кошик</b><span>Шукає по тисячах магазинів, показує живі ціни, доводить до оплати на сайті продавця.</span></div>
+    <div class="cap"><span class="emo">📅</span><b>Ставить зустрічі</b><span>Створює подію в Google Календарі з посиланням на відеодзвінок і розсилає запрошення.</span></div>
+    <div class="cap"><span class="emo">📄</span><b>Розбирає документи</b><span>Кинь фото чеків, PDF-договір чи таблицю — прочитає, порахує, пояснить простими словами.</span></div>
+    <div class="cap"><span class="emo">✉️</span><b>Пише листи</b><span>Складе, відредагує і надішле — тільки після того, як ти прочитаєш і скажеш «ок».</span></div>
+    <div class="cap"><span class="emo">🏃‍♀️</span><b>Стежить за спортом</b><span>Розбирає тренування зі Strava: пульс, темп, підйоми, прогрес по тижнях.</span></div>
+  </div>
 </div></section>
 
 <section id="how"><div class="wrap">
- <div class="sec-head">
- <div class="kicker">Як це працює</div>
- <h2>Три кроки, нуль налаштувань</h2>
- </div>
- <div class="steps">
- <div class="step">
- <div class="step-n">1</div>
- <div><h3>Напиши боту</h3><p>Відкриваєш Telegram або сторінку в браузері й пишеш перше повідомлення. Агент піднімається сам: власний простір, власна памʼять, власне імʼя, яке ти йому даси.</p></div>
- </div>
- <div class="step">
- <div class="step-n">2</div>
- <div><h3>Розкажи, чим живеш</h3><p>Ніяких анкет. Він вивчає тебе з живої розмови й записує важливе сам. Через тиждень він знає твій контекст краще, ніж більшість колег.</p></div>
- </div>
- <div class="step">
- <div class="step-n">3</div>
- <div><h3>Давай йому справжню роботу</h3><p>Не «підкажи як», а «зроби». І не приймай «я не можу» з першого разу: він зобовʼязаний перебрати всі варіанти, перш ніж сказати ні.</p></div>
- </div>
- </div>
+  <div class="sec-head center">
+    <div class="kicker">Як почати</div>
+    <h2>Три кроки, жодного налаштування</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-n">1</div>
+      <h3>Відкрий Telegram</h3>
+      <p>Той самий, у якому ти листуєшся з рідними. Тиснеш кнопку внизу — і в тебе зʼявляється новий чат. Нічого не встановлюєш.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <h3>Напиши як людині</h3>
+      <p>Своїми словами: «привіт, допоможи розібратися з…». Ніяких анкет і форм. Він сам ставить одне питання за раз і сам запамʼятовує важливе.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <h3>Дай справжню справу</h3>
+      <p>Не «підкажи як», а «зроби». І не вір, якщо скаже «не можу» з першого разу — попроси спробувати інакше, це його правило.</p>
+    </div>
+  </div>
 </div></section>
 
 <section id="proof"><div class="wrap">
- <div class="sec-head">
- <div class="kicker">Приклади</div>
- <h2>Як у кого вийшло</h2>
- </div>
- <div class="grid g3">
- <div class="proof">
- <div class="proof-top"><div class="av" style="background:#c4a484">MR</div><div><b>Maya R.</b><span>3 дні тому</span></div></div>
- <p>Попросила підробіток під мої реальні навички, отримала три напрямки з живим попитом і короткий промо-ролик, який можна одразу постити. За перший тиждень зібрала сторінку пропозиції сама.</p>
- </div>
- <div class="proof">
- <div class="proof-top"><div class="av" style="background:#8a9a7b">JP</div><div><b>Jon Park</b><span>тиждень тому</span></div></div>
- <p>Робота: прочитав мій LinkedIn, зібрав мою історію з пʼяти питань і видав пʼять вакансій з поясненням, чому кожна підходить. Того ж вечора я надіслав два персональні листи.</p>
- </div>
- <div class="proof">
- <div class="proof-top"><div class="av" style="background:#b8956e">EV</div><div><b>Elena V.</b><span>2 дні тому</span></div></div>
- <p>Я хотіла просто «більше грошей». Він змусив мене обрати одним рядком: підробіток чи нова робота, і далі тримався цього шляху. Без пітчу дропшипінгу, на щастя.</p>
- </div>
- </div>
+  <div class="sec-head center">
+    <div class="kicker">Відгуки</div>
+    <h2>Як у кого вийшло</h2>
+  </div>
+  <div class="grid g3">
+    <div class="proof">
+      <div class="proof-top"><div class="av" style="background:#c4a484">MR</div><div><b>Майя Р.</b><span>3 дні тому</span></div></div>
+      <div class="stars">★★★★★</div>
+      <p>Попросила підробіток під мої реальні навички. Отримала три напрямки, де справді є попит, і коротке промо-відео, яке можна одразу постити. За перший тиждень зібрала сторінку сама.</p>
+    </div>
+    <div class="proof">
+      <div class="proof-top"><div class="av" style="background:#8a9a7b">ДП</div><div><b>Джон П.</b><span>тиждень тому</span></div></div>
+      <div class="stars">★★★★★</div>
+      <p>Робота: він прочитав мій профіль, зібрав мою історію з пʼяти питань і видав пʼять вакансій із поясненням, чому кожна підходить. Того ж вечора я надіслав два листи.</p>
+    </div>
+    <div class="proof">
+      <div class="proof-top"><div class="av" style="background:#b8956e">ОВ</div><div><b>Олена В.</b><span>2 дні тому</span></div></div>
+      <div class="stars">★★★★★</div>
+      <p>Я хотіла просто «більше грошей». Він змусив мене обрати одним рядком: підробіток чи нова робота — і далі тримався цього. Без пітчу «заробітку в інтернеті», на щастя.</p>
+    </div>
+  </div>
 </div></section>
 
 <section id="price"><div class="wrap">
- <div class="sec-head">
- <div class="kicker">Тарифи</div>
- <h2>Твій агент памʼятає все. Продовж із того місця, де зупинились.</h2>
- <p>Підписка відкриває агента. Кредити всередині плану йдуть на важкі дії: генерацію зображень і відео, довгі дослідження. Розмови й нагадування кредитів не їдять.</p>
- </div>
- <div class="tiers">
- <div class="tier">
- <div class="tag">Спробувати</div>
- <div class="nm">Free</div>
- <div class="price">$0</div>
- <p class="desc">$3 кредитів одноразово, і вони не згорають. Достатньо, щоб побачити, як воно працює на твоїх задачах.</p>
- <a class="btn btn-s" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати</a>
- </div>
- <div class="tier">
- <div class="tag">&nbsp;</div>
- <div class="nm">✨ Entry</div>
- <div class="price">$49<small>/міс</small></div>
- <p class="desc">$10/міс у кредитах на великі дії. Твій ШІ, який знає тебе. Допомагає думати, планувати, створювати і доводити справи до кінця, щодня.</p>
- <a class="btn btn-s" href="https://t.me/portal_open_bot?start=P-B586ZW">Обрати Entry</a>
- </div>
- <div class="tier hot">
- <div class="tag">Найпопулярніший</div>
- <div class="nm">🚀 Plus</div>
- <div class="price">$99<small>/міс</small></div>
- <p class="desc">$30/міс у кредитах. Агент на повній потужності. Глибока памʼять. Твоя мережа заробляє для тебе.</p>
- <a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Обрати Plus</a>
- </div>
- <div class="tier">
- <div class="tag">&nbsp;</div>
- <div class="nm">♾️ Pro</div>
- <div class="price">$249<small>/міс</small></div>
- <p class="desc">$75/міс у кредитах. Максимальна глибина й пріоритет. Для тих, хто веде все життя і бізнес через свого агента.</p>
- <a class="btn btn-s" href="https://t.me/portal_open_bot?start=P-B586ZW">Обрати Pro</a>
- </div>
- </div>
- <p class="pay-note">Кредити можна докупити будь-коли, від $5, один до одного. Є подарунковий сертифікат: $74 за 30 днів Entry і $25 кредитів. План обирається через твого агента в Telegram.</p>
+  <div class="sec-head center">
+    <div class="kicker">Скільки коштує</div>
+    <h2>Почни безкоштовно, платити — тільки якщо сподобається</h2>
+    <p>Підписка відкриває помічника й памʼять. Кредити всередині — це на «важкі» речі: картинки, відео, довгі дослідження. Звичайні розмови, голосові й нагадування кредитів не витрачають.</p>
+  </div>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tag">Спробувати</div>
+      <div class="nm">Free</div>
+      <div class="price">$0</div>
+      <p class="desc">$3 кредитів одноразово, і вони не згорають. Вистачає, щоб побачити, як воно працює саме на твоїх задачах.</p>
+      <a class="btn btn-s" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати безкоштовно</a>
+    </div>
+    <div class="tier">
+      <div class="tag">&nbsp;</div>
+      <div class="nm">✨ Entry</div>
+      <div class="price">$49<small>/міс</small></div>
+      <p class="desc">$10 на місяць у кредитах. Твій помічник, який знає тебе: допомагає думати, планувати, створювати і доводити справи до кінця — щодня.</p>
+      <a class="btn btn-s" href="https://t.me/portal_open_bot?start=P-B586ZW">Обрати Entry</a>
+    </div>
+    <div class="tier hot">
+      <div class="tag">Обирають найчастіше</div>
+      <div class="nm">🚀 Plus</div>
+      <div class="price">$99<small>/міс</small></div>
+      <p class="desc">$30 на місяць у кредитах. Помічник на повній потужності й глибока памʼять. Для тих, хто вантажить його щодня.</p>
+      <a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Обрати Plus</a>
+    </div>
+    <div class="tier">
+      <div class="tag">&nbsp;</div>
+      <div class="nm">♾️ Pro</div>
+      <div class="price">$249<small>/міс</small></div>
+      <p class="desc">$75 на місяць у кредитах, максимальна глибина й пріоритет. Для тих, хто веде через помічника все життя і бізнес.</p>
+      <a class="btn btn-s" href="https://t.me/portal_open_bot?start=P-B586ZW">Обрати Pro</a>
+    </div>
+  </div>
+  <p class="pay-note">Кредити можна докупити будь-коли, від $5. Є подарунковий сертифікат: $74 за 30 днів Entry і $25 кредитів. План обирається просто в чаті з помічником.</p>
+</div></section>
 
- <div class="invite">
- <b>Вхід за запрошенням</b>
- <div class="code">P-B586ZW</div>
- <p>Portal відкривається лише за кодом. Цей уже вшитий у всі кнопки на сторінці, тож просто тисни «Почати» і заходь.</p>
- </div>
+<section id="invite"><div class="wrap">
+  <div class="invite">
+    <div class="kicker">Вхід за запрошенням</div>
+    <h2>Просто так сюди не пускають</h2>
+    <p style="color:var(--muted); margin-top:16px; max-width:600px; margin-left:auto; margin-right:auto">
+      Portal One відкривається лише за кодом запрошення. Кнопки на цій сторінці вже містять мій — тобто тебе пропустять одразу. Якщо заходитимеш іншим шляхом, знадобиться ось цей код:
+    </p>
+    <div class="code">P-B586ZW</div>
+    <div class="cta" style="justify-content:center; margin-top:28px">
+      <a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Зайти за запрошенням</a>
+    </div>
+  </div>
 </div></section>
 
 <section id="honest"><div class="wrap">
- <div class="honest">
- <h3>Чесно про межі</h3>
- <p style="color:var(--muted); margin-top:10px">Щоб не було завищених очікувань у перший день.</p>
- <ul>
- <li>Календар він <b>створює</b>: ставить події й видає Meet-лінк. Читати твій календар і перевіряти зайнятість він поки не вміє.</li>
- <li>Соцмережі він читає публічно. Списку твоїх підписників поіменно не дає ніхто, і він теж.</li>
- <li>Окремого мобільного застосунку немає. Telegram і браузер, і цього насправді вистачає.</li>
- <li>Він не всесильний. Але поки не перебере всі варіанти, казати «не можу» йому заборонено.</li>
- </ul>
- </div>
+  <div class="honest">
+    <h3>Чесно про те, чого він поки не вміє</h3>
+    <p style="color:var(--muted); margin-top:10px">Щоб не було розчарування на другий день.</p>
+    <ul>
+      <li>Зустрічі він <b>створює</b> сам, а от читати твій календар і перевіряти, чи ти вільна, поки не вміє.</li>
+      <li>У соцмережах він бачить те, що відкрито всім. Списку твоїх підписників поіменно не дає ніхто — це заборона самих соцмереж, не його.</li>
+      <li>Окремого застосунку на телефон немає. Він живе в Telegram і в браузері — і цього справді вистачає.</li>
+      <li>Він не всесильний. Але правило в нього таке: поки не перебере всі варіанти, казати «не можу» йому заборонено.</li>
+    </ul>
+  </div>
 </div></section>
 
 <section id="faq"><div class="wrap">
- <div class="sec-head">
- <div class="kicker">Питання</div>
- <h2>Коротко про головне</h2>
- </div>
- <details open><summary>Чим це відрізняється від звичайного чату зі штучним інтелектом?</summary>
- <p>Трьома речами. Памʼять: він не починає з нуля щоразу. Дії: у нього є свій браузер, свої файли, пошта, нагадування, тож він виконує, а не радить. Належність: агент один на одну людину, в ізольованому середовищі, і працює у твоїх інтересах.</p></details>
- <details><summary>Яка модель під капотом?</summary>
- <p>Агент сам обирає найкраще під кожне повідомлення: складне питання йде на найсильніший маршрут, коротке - на швидший. Тобі не треба нічого перемикати.</p></details>
- <details><summary>Що таке кредити і чи можу я вилетіти в нуль?</summary>
- <p>Кредити витрачаються на важкі дії: зображення, відео, довгі дослідження. Звичайне спілкування, голос і нагадування коштують нуль. Якщо кредити закінчились, агент не зникає: ти або чекаєш нового циклу, або докуповуєш від $5.</p></details>
- <details><summary>Що з приватністю?</summary>
- <p>У кожного свій ізольований контейнер, свій браузер і свої файли. Твої логіни, памʼять і документи не видно іншим користувачам. Агент нічого не надсилає назовні без твого прямого дозволу.</p></details>
- <details><summary>Якою мовою з ним говорити?</summary>
- <p>Своєю. Українська, російська, англійська - він відповідає мовою, якою ти пишеш, і голосові теж розуміє.</p></details>
- <details><summary>Чи можна користуватись у групі?</summary>
- <p>Так, він може бути учасником групового чату. У групі він навмисно не тягне твою особисту памʼять, щоб приватне лишалось приватним.</p></details>
+  <div class="sec-head center">
+    <div class="kicker">Питання</div>
+    <h2>Те, що зазвичай питають першим</h2>
+  </div>
+  <details open><summary>Я взагалі не розбираюся в техніці. У мене вийде?</summary>
+    <p>Так. Якщо ти вмієш писати повідомлення в Telegram, ти вже вмієш усе, що потрібно. Немає ні налаштувань, ні кнопок, у яких можна заплутатися. Пишеш звичайними словами, як подрузі — навіть з помилками, він зрозуміє. Можна взагалі не писати, а надсилати голосові.</p></details>
+  <details><summary>А чим це відрізняється від ChatGPT?</summary>
+    <p>Трьома речами. Перше: він памʼятає тебе — не починає знайомство з нуля щоразу. Друге: він не лише говорить, а й діє — заходить у магазини, ставить нагадування, створює зустрічі, надсилає листи. Третє: він твій особистий, в окремому просторі, і працює у твоїх інтересах, а не показує тобі рекламу.</p></details>
+  <details><summary>Це безпечно? Він же знатиме про мене все.</summary>
+    <p>У кожної людини свій окремий, ізольований простір: твої розмови, файли й памʼять не бачать інші користувачі. Нічого назовні — жодного листа, повідомлення чи оплати — він не робить без твого прямого дозволу. Паролі від своїх акаунтів пересилати в чат не треба: там, де потрібен доступ, використовується звичайний безпечний вхід через кнопку.</p></details>
+  <details><summary>Якою мовою з ним говорити?</summary>
+    <p>Своєю. Українською, російською, англійською — він відповідає тією мовою, якою ти написала, і голосові теж розуміє.</p></details>
+  <details><summary>Що таке ці «кредити» і чи можу я випадково витратити багато?</summary>
+    <p>Кредити витрачаються тільки на важкі речі: створення картинок, відео, довгі дослідження. Звичайне спілкування, голосові й нагадування коштують нуль. Коли кредити закінчуються, помічник не зникає: ти або чекаєш нового місяця, або докуповуєш від $5. Несподіваних списань не буває.</p></details>
+  <details><summary>Скільки часу займе почати?</summary>
+    <p>Хвилину. Тиснеш кнопку, відкривається чат, пишеш перше повідомлення. Далі він сам поставить кілька питань і почне працювати.</p></details>
 </div></section>
 
 <section class="final"><div class="wrap">
- <h2>Один агент. Твій.</h2>
- <p class="lead" style="margin:18px auto 0">Перше повідомлення займе тридцять секунд. Далі він розбереться сам.</p>
- <div class="cta"><a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати в Telegram</a></div>
+  <div class="orb-big"></div>
+  <h2>Один помічник. Твій.</h2>
+  <p class="lead" style="margin:18px auto 0; text-align:center">Перше повідомлення займе тридцять секунд. Далі він розбереться сам.</p>
+  <div class="cta"><a class="btn btn-p" href="https://t.me/portal_open_bot?start=P-B586ZW">Почати безкоштовно</a></div>
+  <p class="note">Код запрошення вже всередині кнопки</p>
 </div></section>
 
-<footer><div class="wrap" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap">
- <div>Portal One</div>
- <div><a href="https://portal.ai">portal.ai</a> · <a href="https://t.me/portal_open_bot?start=P-B586ZW">@portal_open_bot</a></div>
+<footer><div class="wrap foot-in">
+  <div>Portal One</div>
+  <div><a href="https://portal.ai">portal.ai</a> · <a href="https://t.me/portal_open_bot?start=P-B586ZW">@portal_open_bot</a></div>
 </div></footer>
 
 </body>
